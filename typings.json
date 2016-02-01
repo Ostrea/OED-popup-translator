@@ -1,0 +1,7 @@
+{
+  "dependencies": {},
+  "devDependencies": {},
+  "ambientDependencies": {
+    "chrome": "github:DefinitelyTyped/DefinitelyTyped/chrome/chrome.d.ts#770eb0fef6647a839e770b6ff8389e772eb3f6e3"
+  }
+}
