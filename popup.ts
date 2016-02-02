@@ -9,25 +9,14 @@ document.addEventListener('DOMContentLoaded',
                                            "https://www.oxforddictionaries.com/" + 
                                            "definition/american_english/punt");
                               request.onload = () => {
-                                  var response = request.response;
-                                  if (!response || !response.responseData ||
-                                      !response.responseData.results ||
-                                      response.responseData.results.length === 0) {
-                                      renderStatus("No response from server.");
+                                  if (request.status !== 200) {
+                                      renderStatus("Bad response from server." +
+                                                  "Status: " + request.status);
+                                      return;
                                   }
-
-                                  var body = document.createElement("body");
-                                  body.innerHTML = request.responseText;
-                                  var wordDefinition = body.querySelectorAll(
-                                      "div.responsive_cell_center");
-                                  var css =<HTMLLinkElement>
-                                      body.querySelector("link[type='text/css']");
-                                  console.log(css);
-
-                                  renderStatus(css.outerHTML +
-                                               wordDefinition.item(0).innerHTML);
+                                  renderStatus(parseHtml(request));
                               }
-                              
+                              // TODO Can't pronounce
                               request.onerror = () => {
                                   renderStatus("Error when trying to send " +
                                                "request!");
@@ -37,6 +26,16 @@ document.addEventListener('DOMContentLoaded',
                               request.send();
                           })
 
-function renderStatus(htmlFromDictionary: string) {
+function renderStatus(htmlFromDictionary: string): void {
     document.body.innerHTML = htmlFromDictionary;
+}
+
+function parseHtml(request: XMLHttpRequest): string {
+    var body = document.createElement("body");
+    body.innerHTML = request.responseText;
+    var wordDefinition = body.querySelectorAll(
+        "div.responsive_cell_center");
+    var css = <HTMLLinkElement> body.querySelector("link[type='text/css']");
+//    var js = <HTMLLinkElement> body.querySelector("link[type='text/javascript'");
+    return/* js.outerHTML + */ css.outerHTML + wordDefinition.item(0).innerHTML;
 }
