@@ -1,7 +1,6 @@
 /// <reference path="typings/main.d.ts" />
 "use strict";
 
-
 document.addEventListener('DOMContentLoaded',
                           () => {
                               var request = new XMLHttpRequest();
@@ -11,20 +10,20 @@ document.addEventListener('DOMContentLoaded',
                               request.onload = () => {
                                   if (request.status !== 200) {
                                       renderStatus("Bad response from server." +
-                                                  "Status: " + request.status);
+                                          "Status: " + request.status);
                                       return;
                                   }
                                   renderStatus(parseHtml(request));
-                              }
-                              // TODO Can't pronounce
+                                  addEventListenersForAudioElements();
+                              };
+
                               request.onerror = () => {
-                                  renderStatus("Error when trying to send " +
-                                               "request!");
+                                  renderStatus("Error when trying to send request!");
                                
-                              }
+                              };
                               
                               request.send();
-                          })
+                          });
 
 function renderStatus(htmlFromDictionary: string): void {
     document.body.innerHTML = htmlFromDictionary;
@@ -33,9 +32,61 @@ function renderStatus(htmlFromDictionary: string): void {
 function parseHtml(request: XMLHttpRequest): string {
     var body = document.createElement("body");
     body.innerHTML = request.responseText;
-    var wordDefinition = body.querySelectorAll(
-        "div.responsive_cell_center");
+    var wordDefinition = body.querySelectorAll("div.responsive_cell_center");
     var css = <HTMLLinkElement> body.querySelector("link[type='text/css']");
-//    var js = <HTMLLinkElement> body.querySelector("link[type='text/javascript'");
-    return/* js.outerHTML + */ css.outerHTML + wordDefinition.item(0).innerHTML;
+    return css.outerHTML + (<HTMLElement> wordDefinition.item(0)).innerHTML;
+}
+
+var audio = null;
+function addEventListenersForAudioElements(): void {
+    var elementsWithPlayClass = document.getElementsByClassName("audio_play_button");
+    for (var i = 0; i < elementsWithPlayClass.length; i++) {
+        elementsWithPlayClass.item(i).addEventListener("click", function (e) {
+            var srcMp3 = this.getAttribute("data-src-mp3");
+            var srcOgg = this.getAttribute("data-src-ogg");
+
+            if (supportAudioHtml5()) {
+                playHtml5(srcMp3, srcOgg);
+            } else {
+                alert("Something wrong with audio!");
+            }
+        }, false);
+    }
+}
+
+function supportAudioHtml5() {
+    var audioTag  = document.createElement("audio");
+    try {
+        return (!!(audioTag.canPlayType)
+        && ((audioTag.canPlayType("audio/mpeg") != "no" && audioTag.canPlayType("audio/mpeg") != "")
+        || (audioTag.canPlayType("audio/ogg") != "no" && audioTag.canPlayType("audio/ogg") != "" )));
+    } catch(e) {
+        return false;
+    }
+}
+
+function playHtml5(srcMp3, srcOgg) {
+    if (audio != null){
+        // PLODOMAINT-345: avoid overlapping
+        if (!audio.ended){
+            audio.pause();
+            if(audio.currentTime > 0) {
+                audio.currentTime = 0
+            }
+        }
+    }
+
+    // Use appropriate source.
+    audio = new Audio("");
+    if (audio.canPlayType("audio/mpeg") != "no" && audio.canPlayType("audio/mpeg") != "") {
+        audio = new Audio(srcMp3);
+    } else if (audio.canPlayType("audio/ogg") != "no" && audio.canPlayType("audio/ogg") != "") {
+        audio = new Audio(srcOgg);
+    }
+
+    // Play
+    audio.addEventListener("error", function(e) {
+        alert("Apologies, the sound is not available.");
+    });
+    audio.play();
 }
