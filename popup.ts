@@ -3,7 +3,8 @@
 
 document.addEventListener('DOMContentLoaded',
                           () => {
-                              document.getElementById("define_button").addEventListener("click", test, false);
+                              document.getElementById("define_button").addEventListener("click",
+                                  handleDefineButton, false);
                               sendRequest(Language.American, "punt");
                           });
 
@@ -12,7 +13,7 @@ enum Language {
     American
 }
 
-function test(): void {
+function handleDefineButton(): void {
     alert("Button clicked")
 }
 
@@ -31,7 +32,7 @@ function sendRequest(language: Language, word: string): void {
         }
         renderStatus(parseHtml(request));
         addEventListenersForAudioElements();
-        document.getElementById("define_button").addEventListener("click", test, false);
+        document.getElementById("define_button").addEventListener("click", handleDefineButton, false);
     };
     request.onerror = () => {
         renderStatus("Error when trying to send request!");
