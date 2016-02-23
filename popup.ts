@@ -24,12 +24,15 @@ document.addEventListener('DOMContentLoaded',
 
                               document.getElementById("define_button").addEventListener("click",
                                   handleDefineButton, false);
+
                               inputField.addEventListener("keyup",
                                   (event: KeyboardEvent) => {
                                       if (event.keyCode == 13) {
                                           handleDefineButton();
                                       }
                                   }, false);
+                              inputField.focus();
+                              inputField.select();
                           });
 
 enum Language {
