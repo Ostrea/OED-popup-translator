@@ -37,11 +37,10 @@ function parseHtml(request: XMLHttpRequest): string {
     return css.outerHTML + (<HTMLElement> wordDefinition.item(0)).innerHTML;
 }
 
-var audio = null;
 function addEventListenersForAudioElements(): void {
     var elementsWithPlayClass = document.getElementsByClassName("audio_play_button");
     for (var i = 0; i < elementsWithPlayClass.length; i++) {
-        elementsWithPlayClass.item(i).addEventListener("click", function (e) {
+        elementsWithPlayClass.item(i).addEventListener("click", function() {
             var srcMp3 = this.getAttribute("data-src-mp3");
             var srcOgg = this.getAttribute("data-src-ogg");
 
@@ -65,6 +64,7 @@ function supportAudioHtml5() {
     }
 }
 
+var audio = null;
 function playHtml5(srcMp3, srcOgg) {
     if (audio != null){
         // PLODOMAINT-345: avoid overlapping
@@ -85,7 +85,7 @@ function playHtml5(srcMp3, srcOgg) {
     }
 
     // Play
-    audio.addEventListener("error", function(e) {
+    audio.addEventListener("error", function() {
         alert("Apologies, the sound is not available.");
     });
     audio.play();
