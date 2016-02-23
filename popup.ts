@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded',
                           () => {
                               document.getElementById("define_button").addEventListener("click",
                                   handleDefineButton, false);
-                              sendRequest(Language.American, "punt");
                           });
 
 enum Language {
@@ -14,7 +13,19 @@ enum Language {
 }
 
 function handleDefineButton(): void {
-    alert("Button clicked")
+    var word = (<HTMLInputElement> document.getElementById("word_to_look_up")).value;
+
+    var languageAsString = (<HTMLSelectElement> document.getElementById("language")).value;
+    var language: Language;
+    if (languageAsString == "american") {
+        language = Language.American;
+    } else if (languageAsString == "british") {
+        language = Language.British;
+    } else {
+        alert("Wrong language!");
+    }
+
+    sendRequest(language, word);
 }
 
 function sendRequest(language: Language, word: string): void {
@@ -33,6 +44,7 @@ function sendRequest(language: Language, word: string): void {
         renderStatus(parseHtml(request));
         addEventListenersForAudioElements();
         document.getElementById("define_button").addEventListener("click", handleDefineButton, false);
+        (<HTMLInputElement> document.getElementById("word_to_look_up")).value = word;
     };
     request.onerror = () => {
         renderStatus("Error when trying to send request!");
@@ -42,7 +54,8 @@ function sendRequest(language: Language, word: string): void {
 }
 
 function renderStatus(htmlFromDictionary: string): void {
-    document.body.innerHTML += htmlFromDictionary;
+    var wordDefinitionDiv = document.getElementById("word_definition");
+    wordDefinitionDiv.innerHTML = htmlFromDictionary;
 }
 
 function parseHtml(request: XMLHttpRequest): string {
