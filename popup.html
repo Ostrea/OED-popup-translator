@@ -7,32 +7,14 @@
 <html>
   <head>
     <title>Getting Started Extension's Popup</title>
-    <style>
-        body {
-            font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-            font-size: 100%;
-        }
-        #define_button {
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 15px;
-            background-color: #48e;
-            border: 1px solid #37d;
-            display: inline-block;
-            color: #ffffff;
-            height: 100%;
-            margin-top: 9px;
-            padding: 1px 20px;
-        }
-    </style>
-
     <!--
       - JavaScript and HTML must be in separate files: see our Content Security
       - Policy documentation[1] for details and explanation.
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
-    <script src="popup.js"></script>
+      <script src="popup.js"></script>
+      <link rel="stylesheet" type="text/css" href="popup.css">
   </head>
   <body>
     <input type="text" id="word_to_look_up">

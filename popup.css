@@ -1,0 +1,38 @@
+body {
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    font-size: 100%;
+}
+#define_button {
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: #48e;
+    border: 1px solid #37d;
+    display: inline-block;
+    color: #ffffff;
+    height: 100%;
+    margin-top: 9px;
+    padding: 1px 20px;
+}
+#word_to_look_up {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0;
+    text-shadow: none;
+    text-align: start;
+    margin-left: 2px;
+    font: 14px Arial;
+    cursor: auto;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 1px 5px;
+    width: 240px;
+    height: 100%;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+}
