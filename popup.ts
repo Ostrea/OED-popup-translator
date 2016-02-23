@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded',
                           () => {
                               document.getElementById("define_button").addEventListener("click",
                                   handleDefineButton, false);
+                              document.getElementById("word_to_look_up").addEventListener("keyup",
+                                  (event: KeyboardEvent) => {
+                                      if (event.keyCode == 13) {
+                                          handleDefineButton();
+                                      }
+                                  }, false);
                           });
 
 enum Language {
