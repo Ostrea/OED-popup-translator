@@ -5,7 +5,7 @@
  value "popup.html".
  -->
 <html>
-  <head>
+<head>
     <title>Getting Started Extension's Popup</title>
     <!--
       - JavaScript and HTML must be in separate files: see our Content Security
@@ -13,16 +13,20 @@
       -
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
-      <script src="popup.js"></script>
-      <link rel="stylesheet" type="text/css" href="popup.css">
-  </head>
-  <body>
-    <select id="language">
-      <option value="american" selected="selected">ENG(US)</option>
-      <option value="british">ENG(UK)</option>
-    </select>
-    <input type="text" id="word_to_look_up">
-    <button type="button" id="define_button">Define</button>
-  </body>
+    <script src="popup.js"></script>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <!-- TODO make this div stick to the top of the page -->
+    <div>
+        <select id="language">
+            <option value="american" selected="selected">ENG(US)</option>
+            <option value="british">ENG(UK)</option>
+        </select>
+        <input type="text" id="word_to_look_up">
+        <button type="button" id="define_button">Define</button>
+    </div>
+</body>
 </html>
 
