@@ -3,12 +3,17 @@
 
 document.addEventListener('DOMContentLoaded',
                           () => {
-                              sendRequest(Language.British, "punt");
+                              document.getElementById("define_button").addEventListener("click", test, false);
+                              sendRequest(Language.American, "punt");
                           });
 
 enum Language {
     British,
     American
+}
+
+function test(): void {
+    alert("Button clicked")
 }
 
 function sendRequest(language: Language, word: string): void {
@@ -26,18 +31,17 @@ function sendRequest(language: Language, word: string): void {
         }
         renderStatus(parseHtml(request));
         addEventListenersForAudioElements();
+        document.getElementById("define_button").addEventListener("click", test, false);
     };
-
     request.onerror = () => {
         renderStatus("Error when trying to send request!");
-
     };
 
     request.send();
 }
 
 function renderStatus(htmlFromDictionary: string): void {
-    document.body.innerHTML = htmlFromDictionary;
+    document.body.innerHTML += htmlFromDictionary;
 }
 
 function parseHtml(request: XMLHttpRequest): string {
