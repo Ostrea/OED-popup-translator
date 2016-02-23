@@ -37,7 +37,7 @@ function sendRequest(language: Language, word: string): void {
         "definition/" + languageStringValue + "/" + word);
     request.onload = () => {
         if (request.status !== 200) {
-            renderStatus("Bad response from server." +
+            alert("Bad response from server." +
                 "Status: " + request.status);
             return;
         }
@@ -47,7 +47,7 @@ function sendRequest(language: Language, word: string): void {
         (<HTMLInputElement> document.getElementById("word_to_look_up")).value = word;
     };
     request.onerror = () => {
-        renderStatus("Error when trying to send request!");
+        alert("Error when trying to send request!");
     };
 
     request.send();
