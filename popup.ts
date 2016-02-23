@@ -3,9 +3,28 @@
 
 document.addEventListener('DOMContentLoaded',
                           () => {
+                              var inputField = <HTMLInputElement> document.getElementById("word_to_look_up");
+                              chrome.runtime.onMessage.addListener(function(request, sender) {
+                                  if (request.action == "selectedText") {
+                                      inputField.value = request.source;
+                                      handleDefineButton();
+                                  }
+                              });
+
+                              chrome.tabs.executeScript(null, {
+                                  file: "content.js"
+                              }, function() {
+                                  // If you try and inject into an extensions page
+                                  // or the webstore/NTP you'll get an error
+                                  if (chrome.runtime.lastError) {
+                                      alert("There was an error injecting script: \n"
+                                          + chrome.runtime.lastError.message);
+                                  }
+                              });
+
                               document.getElementById("define_button").addEventListener("click",
                                   handleDefineButton, false);
-                              document.getElementById("word_to_look_up").addEventListener("keyup",
+                              inputField.addEventListener("keyup",
                                   (event: KeyboardEvent) => {
                                       if (event.keyCode == 13) {
                                           handleDefineButton();
@@ -42,11 +61,16 @@ function sendRequest(language: Language, word: string): void {
         "https://www.oxforddictionaries.com/" +
         "definition/" + languageStringValue + "/" + word);
     request.onload = () => {
-        if (request.status !== 200) {
+        if (request.status != 200 && request.status != 404) {
             alert("Bad response from server." +
                 "Status: " + request.status);
             return;
         }
+        if (request.status == 404) {
+            renderStatus("No definition found!");
+            return;
+        }
+
         renderStatus(parseHtml(request));
         addEventListenersForAudioElements();
         document.getElementById("define_button").addEventListener("click", handleDefineButton, false);
