@@ -3,27 +3,38 @@
 
 document.addEventListener('DOMContentLoaded',
                           () => {
-                              var request = new XMLHttpRequest();
-                              request.open("GET",
-                                           "https://www.oxforddictionaries.com/" + 
-                                           "definition/american_english/punt");
-                              request.onload = () => {
-                                  if (request.status !== 200) {
-                                      renderStatus("Bad response from server." +
-                                          "Status: " + request.status);
-                                      return;
-                                  }
-                                  renderStatus(parseHtml(request));
-                                  addEventListenersForAudioElements();
-                              };
-
-                              request.onerror = () => {
-                                  renderStatus("Error when trying to send request!");
-                               
-                              };
-                              
-                              request.send();
+                              sendRequest(Language.British, "punt");
                           });
+
+enum Language {
+    British,
+    American
+}
+
+function sendRequest(language: Language, word: string): void {
+    var languageStringValue = (language == Language.American) ? "american_english" : "english";
+
+    var request = new XMLHttpRequest();
+    request.open("GET",
+        "https://www.oxforddictionaries.com/" +
+        "definition/" + languageStringValue + "/" + word);
+    request.onload = () => {
+        if (request.status !== 200) {
+            renderStatus("Bad response from server." +
+                "Status: " + request.status);
+            return;
+        }
+        renderStatus(parseHtml(request));
+        addEventListenersForAudioElements();
+    };
+
+    request.onerror = () => {
+        renderStatus("Error when trying to send request!");
+
+    };
+
+    request.send();
+}
 
 function renderStatus(htmlFromDictionary: string): void {
     document.body.innerHTML = htmlFromDictionary;
