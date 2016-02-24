@@ -62,7 +62,7 @@ function sendRequest(language: Language, word: string): void {
     var request = new XMLHttpRequest();
     request.open("GET",
         "https://www.oxforddictionaries.com/" +
-        "definition/" + languageStringValue + "/" + word);
+        "search/?direct=1&multi=1&dictCode=" + languageStringValue + "&q=" + word);
     request.onload = () => {
         if (request.status != 200 && request.status != 404) {
             alert("Bad response from server." +
