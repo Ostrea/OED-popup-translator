@@ -64,13 +64,9 @@ function sendRequest(language: Language, word: string): void {
         "https://www.oxforddictionaries.com/" +
         "search/?direct=1&multi=1&dictCode=" + languageStringValue + "&q=" + word);
     request.onload = () => {
-        if (request.status != 200 && request.status != 404) {
+        if (request.status != 200) {
             alert("Bad response from server." +
                 "Status: " + request.status);
-            return;
-        }
-        if (request.status == 404) {
-            renderStatus("No definition found!");
             return;
         }
 
