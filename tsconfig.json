@@ -1,6 +1,7 @@
 {
-  "files": [
-    "popup.ts",
-    "content.ts"
-  ]
+   "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "sourceMap": true
+    }
 }
