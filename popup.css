@@ -5,7 +5,7 @@ body {
     min-height: 35px;
 }
 
-#define_button {
+#define-button {
     border-radius: 3px;
     cursor: pointer;
     font-size: 15px;
@@ -17,7 +17,7 @@ body {
     margin-top: 9px;
     padding: 1px 20px;
 }
-#word_to_look_up {
+#word-to-look-up {
     text-rendering: auto;
     color: initial;
     letter-spacing: normal;
@@ -65,7 +65,75 @@ select option {
     z-index: 1;
 }
 
-#word_definition {
+#word-definition {
     position: relative;
     top: 50px;
+}
+
+
+/* Sub lists. */
+ol {
+    counter-reset: item;
+}
+
+ol>li {
+    display: block
+}
+
+ol>li:before {
+    content: counters(item, ".") ". ";
+    counter-increment: item;
+}
+
+
+h1 {
+    font: 16px "Open Sans", sans-serif;
+    color: #2a2a2a;
+    margin-bottom: 22px;
+}
+
+.word {
+    font: 700 32px "Merriweather", sans-serif;
+    color: #2a2a2a;
+    margin-right: 6px;
+}
+
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 2.5px;
+}
+
+.part-of-speech {
+    font: 700 16px "Open Sans", sans-serif;
+    color: #f15a24;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 16px;
+}
+
+section {
+    margin: 0px 20px 32px 0px;
+    border-top: 2px solid #888;
+    padding-top: 4px;
+}
+
+.variant {
+    margin-bottom: 25px;
+}
+
+ul {
+    list-style: none;
+}
+
+.always-shown-examples {
+    position: relative;
+    left: 8%
+}
+
+.sense {
 }
