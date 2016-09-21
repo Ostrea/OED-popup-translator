@@ -1,33 +1,111 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
 <head>
-    <title>Getting Started Extension's Popup</title>
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
+    <meta charset="UTF-8">    
+    
+    <script src="pug_runtime.js"></script>
+    <script src="word_definition.js"></script>
     <script src="popup.js"></script>
+
     <link rel="stylesheet" type="text/css" href="popup.css">
-    <meta charset="UTF-8">
+
+    <title>Popup dictionary</title>
 </head>
 <body>
-    <!-- TODO make this div not overlap link to other words definitions -->
     <div id="header">
         <select id="language">
             <option value="american" selected="selected">ENG(US)</option>
             <option value="british">ENG(UK)</option>
         </select>
-        <input type="text" id="word_to_look_up">
-        <button type="button" id="define_button">Define</button>
+        <input type="text" id="word-to-look-up">
+        <button type="button" id="define-button">Define</button>
     </div>
-    <div id="word_definition"></div>
+
+    <div id="word-definition">
+        <header>
+            <h1>Definition of <em>[word]</em> in [American or British] English:</h1>
+            <h2>
+                <span class="word">[word]</span>
+                <audio>Pronunciation</audio>
+            </h2>
+            <div class="variant">(<em>[Language or `also`]</em> <strong>[Var1]</strong>,
+                <strong>[Var2]</strong>)
+            </div>
+        </header>
+        
+        <!--Definitions for verb or noun or...-->
+        <section>
+            <h3 class="part-of-speech">[noun or verb or...]</h3>
+            <span class="transitivity">[Transitivity if verb]</span>
+            <ol class="senses">
+                <li>
+                    <span class="sense">
+                        <!--<p>[First sense]</p>-->
+                        [First sense]
+                        <div class="always-shown-examples">
+                            <div class="first-always-shown-example">
+                                <em>‘[first always shown example]’</em>
+                            </div>
+                            <div class="second-always-shown-example">
+                                <em>‘[second always shown example]’</em>
+                            </div>
+                        </div>
+                        <button>More example sentences</button>
+                        <div class="examples">
+                            <ul>
+                                <li><em>`[example1]`</em></li>
+                                <li><em>`[example2]`</em></li>
+                            </ul>
+                        </div>
+                    </span>
+
+                    <ol class="subSenses">
+                        <li class="subSense">
+                            <!--<p>-->
+                                <span class="subsense-regions">[British or] </span>
+                                <span class="ind">[First sub sense]</span>
+                            <!--</p>-->
+                            <div class="always-shown-examples">
+                                <div class="first-always-shown-example">
+                                    <em>‘[first always shown example]’</em>
+                                </div>
+                                <div class="second-always-shown-example">
+                                    <em>‘[second always shown example]’</em>
+                                </div>
+                            </div>
+                            <button>More example sentences</button>
+                            <div class="examples">
+                                <ul>
+                                    <li><em>`[example1]`</em></li>
+                                    <li><em>`[example2]`</em></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+                <li>[Second sense]</li>
+            </ul>
+        </section>
+        
+        <!--Definitions for verb or noun or...-->
+        <section>
+        </section>
+        
+        <section class="etymology etym">
+            <h3><strong>Origin</strong></h3>
+            <div class="senseInnerWrapper">
+                <p>Early 19th century: variant of earlier hollo; related to holla.</p>
+            </div>
+        </section>
+
+        <section class="pronSection etym">
+            <h3><strong>Pronunciation:</strong></h3>
+            <div class="pron">
+                <h2><strong>hello</strong></h2>
+                    <span class="phoneticspelling">/heˈlō/</span>
+                    <span class="phoneticspelling">/həˈlō/</span>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
-
