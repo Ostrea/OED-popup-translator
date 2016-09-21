@@ -4,3 +4,5 @@ typings/
 *.js.map
 *.png
 .vscode/
+node_modules/
+dist/
