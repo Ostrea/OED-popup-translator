@@ -1,9 +1,17 @@
 /// <reference path="typings/main.d.ts" />
 "use strict";
 
+declare function template(message: Object): string;
 
 document.addEventListener("DOMContentLoaded",
     () => {
+        const wordDefinitionDiv = document.getElementById("word-definition");
+        wordDefinitionDiv.innerHTML = template({
+            word: "hello",
+            region: "American", inWhichLanguageOtherUses: "Language or `also`",
+            otherSpellings: ["hallo", "hullo"]
+        });
+
         const inputField = <HTMLInputElement>
             document.getElementById("word_to_look_up");
         chrome.runtime.onMessage.addListener((request, sender) => {
