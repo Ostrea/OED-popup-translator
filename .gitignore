@@ -1,7 +1,5 @@
 typings/
 *~
-*.js
-*.js.map
 *.png
 .vscode/
 node_modules/
