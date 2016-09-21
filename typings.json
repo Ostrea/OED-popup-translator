@@ -1,9 +1,9 @@
 {
-  "name": "popup_dictionary",
-  "globalDevDependencies": {
-    "chrome": "registry:dt/chrome#0.0.0+20160724063844",
-    "filesystem": "registry:dt/filesystem#0.0.0+20160316155526",
-    "filewriter": "registry:dt/filewriter#0.0.0+20160316155526",
-    "webrtc/mediastream": "registry:dt/webrtc/mediastream#0.0.0+20160317120654"
-  }
+    "name": "popup_dictionary",
+    "globalDevDependencies": {
+        "chrome": "registry:dt/chrome#0.0.0+20160724063844",
+        "filesystem": "registry:dt/filesystem#0.0.0+20160316155526",
+        "filewriter": "registry:dt/filewriter#0.0.0+20160316155526",
+        "webrtc/mediastream": "registry:dt/webrtc/mediastream#0.0.0+20160317120654"
+    }
 }
