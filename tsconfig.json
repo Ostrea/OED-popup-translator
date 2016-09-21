@@ -1,5 +1,11 @@
 {
-   "compilerOptions": {
+    "files": [
+        "typings/index.d.ts",
+        "src/content.ts",
+        "src/popup.ts",
+        "src/main.ts"
+    ],
+    "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
         "sourceMap": true,
