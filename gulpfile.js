@@ -13,7 +13,7 @@ var ts = require("gulp-typescript");
 
 
 var paths = {
-    views: ["src/views/*.html"],
+    viewsFolder: ["src/views/"],
     manifest: ["manifest.json"]
 };
 
@@ -28,7 +28,7 @@ gulp.task("clean-dist", function () {
 
 
 gulp.task("copy-html", function () {
-    return gulp.src(paths.views)
+    return gulp.src(paths.viewsFolder + "*.html")
         .pipe(gulp.dest("dist"));
 });
 
