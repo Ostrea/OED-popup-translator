@@ -45,44 +45,44 @@ gulp.task("copy-icon", function () {
 });
 
 
-gulp.task("compile-content-script", function () {
+function compileTypeScriptFiles(entries, bundleName) {
     return browserify({
         basedir: '.',
         debug: true,
-        entries: ["src/content.ts"],
+        entries: entries,
         cache: {},
         packageCache: {}
     })
         .plugin(tsify)
         .bundle()
         .on("error", function (error) { console.error(error.toString()); })
-        .pipe(source("content_bundle.js"))
-        .pipe(buffer())
+        .pipe(source(bundleName));
+}
+
+
+function uglifyJavaScriptFiles(stream) {
+    return stream.pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(uglify())
         .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest("dist"));
+}
+
+
+gulp.task("compile-content-script", function () {
+    var stream = compileTypeScriptFiles(["src/content.ts"],
+        "content_bundle.js");
+    return uglifyJavaScriptFiles(stream);
 });
 
 
-gulp.task("default",
-    ["clean-dist", "copy-manifest", "copy-icon", "compile-content-script",
-        "copy-html"],
-    function () {
-        return browserify({
-            basedir: '.',
-            debug: true,
-            entries: ["src/popup.ts"],
-            cache: {},
-            packageCache: {}
-        })
-            .plugin(tsify)
-            .bundle()
-            .on("error", function (error) { console.error(error.toString()); })
-            .pipe(source("bundle.js"))
-            .pipe(buffer())
-            .pipe(sourcemaps.init({ loadMaps: true }))
-            .pipe(uglify())
-            .pipe(sourcemaps.write("./"))
-            .pipe(gulp.dest("dist"));
-    });
+gulp.task("compile-popup-script", function () {
+    var stream = compileTypeScriptFiles(["src/popup.ts"], "bundle.js");
+    return uglifyJavaScriptFiles(stream);
+});
+
+
+gulp.task("default", [
+    "clean-dist", "copy-manifest", "copy-icon", "copy-html",
+    "compile-popup-script", "compile-content-script"
+]);
