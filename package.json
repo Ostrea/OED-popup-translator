@@ -16,6 +16,7 @@
         "browserify": "^13.1.0",
         "del": "^2.2.2",
         "gulp": "^3.9.1",
+        "gulp-pug": "^3.0.4",
         "gulp-sourcemaps": "^1.6.0",
         "gulp-typescript": "^2.14.1",
         "gulp-uglify": "^2.0.0",
