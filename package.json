@@ -1,25 +1,26 @@
 {
-  "name": "popup_dictionary",
-  "version": "1.0.0",
-  "description": "Chrome extension to show word definition from OED.",
-  "main": "./dist/main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Ostrea/OED-popup-translator"
-  },
-  "author": "Ostrea",
-  "license": "MIT",
-  "devDependencies": {
-    "browserify": "^13.1.0",
-    "gulp": "^3.9.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-typescript": "^2.14.1",
-    "gulp-uglify": "^2.0.0",
-    "tsify": "^1.0.7",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
-  }
+    "name": "popup_dictionary",
+    "version": "1.0.0",
+    "description": "Chrome extension to show word definition from OED.",
+    "main": "./dist/main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Ostrea/OED-popup-translator"
+    },
+    "author": "Ostrea",
+    "license": "MIT",
+    "devDependencies": {
+        "browserify": "^13.1.0",
+        "del": "^2.2.2",
+        "gulp": "^3.9.1",
+        "gulp-sourcemaps": "^1.6.0",
+        "gulp-typescript": "^2.14.1",
+        "gulp-uglify": "^2.0.0",
+        "tsify": "^1.0.7",
+        "vinyl-buffer": "^1.0.0",
+        "vinyl-source-stream": "^1.1.0"
+    }
 }
