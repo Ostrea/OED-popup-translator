@@ -1,27 +1,33 @@
-/// <reference path="typings/main.d.ts" />
 "use strict";
+
+
+import { sayHello } from "./main";
+
 
 declare function template(message: Object): string;
 
+
 document.addEventListener("DOMContentLoaded",
     () => {
-        const wordDefinitionDiv = document.getElementById("word-definition");
-        wordDefinitionDiv.innerHTML = template({
-            word: "hello",
-            region: "American", inWhichLanguageOtherUses: "Language or `also`",
-            otherSpellings: ["hallo", "hullo"]
-        });
+        // window.alert(sayHello("Gulp!"));
+        // const wordDefinitionDiv = document.getElementById("word-definition");
+        // wordDefinitionDiv.innerHTML = template({
+        //     word: "hello",
+        //     region: "American", inWhichLanguageOtherUses: "Language or `also`",
+        //     otherSpellings: ["hallo", "hullo"]
+        // });
 
         const inputField = <HTMLInputElement>
-            document.getElementById("word_to_look_up");
+            document.getElementById("word-to-look-up");
         chrome.runtime.onMessage.addListener((request, sender) => {
             if (request.action === "selectedText") {
-                inputField.value = request.source;
-                lookUpButtonHandler();
+                window.alert(request.source);
+                inputField.value = sayHello(request.source);
+                // lookUpButtonHandler();
             }
         });
 
-        chrome.tabs.executeScript(null, { file: "content.js" }, () => {
+        chrome.tabs.executeScript(null, { file: "content_bundle.js" }, () => {
             // If you try and inject into an extensions page
             // or the webstore/NTP you'll get an error.
             if (chrome.runtime.lastError) {
@@ -29,19 +35,18 @@ document.addEventListener("DOMContentLoaded",
                     + chrome.runtime.lastError.message);
             }
         });
+        // document.getElementById("define_button").addEventListener("click",
+        //     lookUpButtonHandler, false);
 
-        document.getElementById("define_button").addEventListener("click",
-            lookUpButtonHandler, false);
+        // inputField.addEventListener("keyup", (event: KeyboardEvent) => {
+        //     const enterButtonCode = 13;
+        //     if (event.keyCode === enterButtonCode) {
+        //         lookUpButtonHandler();
+        //     }
+        // }, false);
 
-        inputField.addEventListener("keyup", (event: KeyboardEvent) => {
-            const enterButtonCode = 13;
-            if (event.keyCode === enterButtonCode) {
-                lookUpButtonHandler();
-            }
-        }, false);
-
-        inputField.focus();
-        inputField.select();
+        // inputField.focus();
+        // inputField.select();
     });
 
 
