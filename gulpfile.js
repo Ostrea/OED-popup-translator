@@ -10,7 +10,7 @@ var uglify = require("gulp-uglify");
 var sourcemaps = require("gulp-sourcemaps");
 var buffer = require("vinyl-buffer");
 var del = require('del');
-var ts = require("gulp-typescript");
+var pug = require('gulp-pug');
 
 
 var paths = {
@@ -88,7 +88,19 @@ gulp.task("compile-popup-script", function () {
 });
 
 
+gulp.task("compile-pug-to-js", function () {
+    return gulp.src([
+        paths.viewsFolder + "*.pug",
+        paths.viewsFolder + "!popup.pug"
+    ])
+        .pipe(pug({
+            client: true
+        }))
+        .pipe(gulp.dest("dist"));
+});
+
+
 gulp.task("default", [
     "clean-dist", "copy-manifest", "copy-icon", "copy-html", "copy-css",
-    "compile-popup-script", "compile-content-script"
+    "compile-popup-script", "compile-content-script", "compile-pug-to-js"
 ]);
