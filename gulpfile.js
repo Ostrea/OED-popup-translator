@@ -14,7 +14,6 @@ var ts = require("gulp-typescript");
 
 var paths = {
     viewsFolder: ["src/views/"],
-    manifest: ["manifest.json"]
 };
 
 
@@ -34,7 +33,7 @@ gulp.task("copy-html", function () {
 
 
 gulp.task("copy-manifest", function () {
-    return gulp.src(paths.manifest)
+    return gulp.src("manifest.json")
         .pipe(gulp.dest("dist"));
 });
 
