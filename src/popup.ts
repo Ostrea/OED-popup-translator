@@ -10,12 +10,12 @@ declare function template(message: Object): string;
 document.addEventListener("DOMContentLoaded",
     () => {
         // window.alert(sayHello("Gulp!"));
-        // const wordDefinitionDiv = document.getElementById("word-definition");
-        // wordDefinitionDiv.innerHTML = template({
-        //     word: "hello",
-        //     region: "American", inWhichLanguageOtherUses: "Language or `also`",
-        //     otherSpellings: ["hallo", "hullo"]
-        // });
+        const wordDefinitionDiv = document.getElementById("word-definition");
+        wordDefinitionDiv.innerHTML = template({
+            word: "hello",
+            region: "American", inWhichLanguageOtherUses: "Language or `also`",
+            otherSpellings: ["hallo", "hullo"]
+        });
 
         const inputField = <HTMLInputElement>
             document.getElementById("word-to-look-up");
