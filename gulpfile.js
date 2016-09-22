@@ -33,6 +33,12 @@ gulp.task("copy-html", function () {
 });
 
 
+gulp.task("copy-css", function () {
+    return gulp.src(paths.viewsFolder + "css/*.css")
+        .pipe(gulp.dest("dist"));
+});
+
+
 gulp.task("copy-manifest", function () {
     return gulp.src("manifest.json")
         .pipe(gulp.dest("dist"));
@@ -83,6 +89,6 @@ gulp.task("compile-popup-script", function () {
 
 
 gulp.task("default", [
-    "clean-dist", "copy-manifest", "copy-icon", "copy-html",
+    "clean-dist", "copy-manifest", "copy-icon", "copy-html", "copy-css",
     "compile-popup-script", "compile-content-script"
 ]);
