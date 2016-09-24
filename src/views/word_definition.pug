@@ -1,8 +1,16 @@
 header
     h1 Definition of #[em #{word}] in #{region} English:
-    <h2>
+    h2
         span.word #{word}
         audio Pronunciation
-    .variant.
-        (#[em #{inWhichLanguageOtherUses}]
+    if inWhichLanguageOtherUses
+        .variant
+            | (#[em #{inWhichLanguageOtherUses}] 
+            - var spellings = "";
+            - var i;
+            - for (i = 0; i < otherSpellings.length - 1; i++) {
+                strong= otherSpellings[i] + ", "
+            - }
+            strong= otherSpellings[i]
+            | )
         
