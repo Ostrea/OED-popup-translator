@@ -1,6 +1,9 @@
 "use strict";
 
 
+import { Entry, Sense } from "./entry_classes";
+
+
 declare function template(templateArgs: Object): string;
 
 
@@ -22,33 +25,4 @@ export function main(): void {
         region: "American", inWhichLanguageOtherUses: "Language or `also`",
         otherSpellings: ["hallo", "hullo"], definitions
     });
-}
-
-
-class Entry {
-    partOfSpeech: string;
-    transitivity?: string;
-    senses: Sense[];
-    region?: string;
-
-    constructor(partOfSpeech: string, senses: Sense[], transitivity?: string,
-        region?: string) {
-        this.partOfSpeech = partOfSpeech;
-        this.senses = senses;
-        this.transitivity = transitivity;
-        this.region = region;
-    }
-}
-
-
-class Sense {
-    definition: string;
-    subSenses?: Sense[];
-    region?: string;
-
-    constructor(definition: string, subSenses?: Sense[], region?: string) {
-        this.definition = definition;
-        this.subSenses = subSenses;
-        this.region = region;
-    }
 }
