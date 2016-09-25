@@ -1,28 +1,19 @@
 "use strict";
 
 
-import { sayHello } from "./main";
-
-
-declare function template(message: Object): string;
+import { main } from "./main";
 
 
 document.addEventListener("DOMContentLoaded",
     () => {
-        // window.alert(sayHello("Gulp!"));
-        const wordDefinitionDiv = document.getElementById("word-definition");
-        wordDefinitionDiv.innerHTML = template({
-            word: "hello",
-            region: "American", inWhichLanguageOtherUses: "Language or `also`",
-            otherSpellings: ["hallo", "hullo"]
-        });
+
+        main();
 
         const inputField = <HTMLInputElement>
             document.getElementById("word-to-look-up");
         chrome.runtime.onMessage.addListener((request, sender) => {
             if (request.action === "selectedText") {
-                window.alert(request.source);
-                inputField.value = sayHello(request.source);
+                inputField.value = request.source;
                 // lookUpButtonHandler();
             }
         });
