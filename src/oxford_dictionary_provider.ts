@@ -2,7 +2,7 @@
 
 
 import { APP_ID, APP_KEY } from "./secrets";
-import { Entry } from "./entry_classes";
+import { Entry, Sense } from "./entry_classes";
 
 
 const BASE_URL = "https://od-api.oxforddictionaries.com:443/api/v1/";
@@ -23,6 +23,7 @@ export function lookUpWord(word: string, region: string,
             alert("Bad response from server. Status: " + request.status);
             return;
         }
+
         const entries = processJson(request.responseText);
         populateTemplate(entries);
     };
@@ -35,6 +36,50 @@ export function lookUpWord(word: string, region: string,
 
 
 function processJson(json: string): Entry[] {
-    alert(json);
-    return [];
+    const rawEntries = JSON.parse(json).results[0].lexicalEntries;
+
+    const allEntries: Entry[] = [];
+    for (let sectionDefinition of rawEntries) {
+        const partOfSpeech = sectionDefinition.lexicalCategory;
+
+        let transitivity = undefined;
+        if (sectionDefinition.grammaticalFeatures) {
+            transitivity = sectionDefinition.grammaticalFeatures[0].text;
+        }
+
+        const linkToAudio = sectionDefinition.pronunciations.find(
+            obj => obj.audioFile).audioFile;
+
+        const entries = sectionDefinition.entries;
+
+        for (let entry of entries) {
+            const variantForms = [];
+            variantForms.push.apply(variantForms, entry.variantForms);
+
+            const rawSenses = entry.senses;
+            const senses: Sense[] = [];
+            for (let sense of rawSenses) {
+                const definition: string = sense.definitions[0];
+                const examples = sense.examples;
+
+                let subSenses: Sense[] = undefined;
+                if (sense.subsenses) {
+                    subSenses = [];
+                    for (let subSense of sense.subsenses) {
+                        const definition: string = subSense.definitions[0];
+                        const examples = subSense.examples;
+                        const regions = subSense.regions;
+                        subSenses.push(new Sense(definition, undefined,
+                            regions));
+                    }
+                }
+
+                senses.push(new Sense(definition, subSenses));
+            }
+
+            allEntries.push(new Entry(partOfSpeech, senses, transitivity));
+        }
+    }
+
+    return allEntries;
 }
