@@ -1,6 +1,6 @@
 typings/
 *~
-*.png
+assets/
 .vscode/
 node_modules/
 dist/
