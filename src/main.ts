@@ -10,17 +10,6 @@ declare function template(templateArgs: Object): string;
 
 export function main(): void {
     lookUpWord("hello", "us", populateTemplate);
-
-    // const definitions = [
-    //     new Entry("Exclamation", [
-    //         new Sense(
-    //             "Used as a greeting or to begin a telephone conversation.",
-    //             [new Sense("Used to express surprise", undefined, "British")]
-    //         )
-    //     ]), new Entry("Verb", [
-    //         new Sense("Say or shout “hello”; greet someone.")
-    //     ], "[NO OBJECT]")
-    // ];
 }
 
 
