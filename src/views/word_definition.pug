@@ -5,10 +5,10 @@ header
 
 for entry in entries
     section
+        span.part-of-speech #{entry.partOfSpeech}        
         if entry.linkToAudio
-            .audio
+            span.audio
                 audio(src=entry.linkToAudio) Pronunciation
                 img(src="play.png")
-        h3.part-of-speech #{entry.partOfSpeech.toUpperCase()}
         if entry.transitivity
-            span.transitivity #{entry.transitivity}
+            .transitivity #{entry.transitivity}
