@@ -16,7 +16,6 @@ export function main(): void {
 function populateTemplate(word: string, region: string,
     entries: Entry[]): void {
     const wordDefinitionDiv = document.getElementById("word-definition");
-    alert("Populate template!");
     wordDefinitionDiv.innerHTML = template({
         word: word, region: region, entries: entries
         // region: "American", inWhichLanguageOtherUses: "Language or `also`",
@@ -26,7 +25,6 @@ function populateTemplate(word: string, region: string,
     const audios = wordDefinitionDiv.getElementsByClassName("audio");
     Array.prototype.forEach.call(audios, audio => {
         audio.onclick = function () {
-            alert("play");
             this.firstElementChild.play();
         };
 
