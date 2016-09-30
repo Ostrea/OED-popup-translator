@@ -13,4 +13,9 @@ header
             - }
             strong= otherSpellings[i]
             | )
-        
+
+for entry in entries
+    section
+        h3.part-of-speech #{entry.partOfSpeech.toUpperCase()}
+        if entry.transitivity
+            span.transitivity #{entry.transitivity}
