@@ -45,8 +45,8 @@ gulp.task("copy-manifest", function () {
 });
 
 
-gulp.task("copy-icon", function () {
-    return gulp.src("icon.png")
+gulp.task("copy-assets", function () {
+    return gulp.src("assets/*.png")
         .pipe(gulp.dest("dist"));
 });
 
@@ -101,6 +101,6 @@ gulp.task("compile-pug-to-js", function () {
 
 
 gulp.task("default", [
-    "clean-dist", "copy-manifest", "copy-icon", "copy-html", "copy-css",
+    "clean-dist", "copy-manifest", "copy-assets", "copy-html", "copy-css",
     "compile-popup-script", "compile-content-script", "compile-pug-to-js"
 ]);
