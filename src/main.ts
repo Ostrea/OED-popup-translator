@@ -13,12 +13,22 @@ export function main(): void {
 }
 
 
-function populateTemplate(entries: Entry[]): void {
+function populateTemplate(word: string, region: string,
+    entries: Entry[]): void {
     const wordDefinitionDiv = document.getElementById("word-definition");
     alert("Populate template!");
-    // wordDefinitionDiv.innerHTML = template({
-    //     word: "hello",
-    //     region: "American", inWhichLanguageOtherUses: "Language or `also`",
-    //     otherSpellings: ["hallo", "hullo"], definitions
-    // });
+    wordDefinitionDiv.innerHTML = template({
+        word: word, region: region, entries: entries
+        // region: "American", inWhichLanguageOtherUses: "Language or `also`",
+        // otherSpellings: ["hallo", "hullo"], definitions
+    });
+
+    const audios = wordDefinitionDiv.getElementsByClassName("audio");
+    Array.prototype.forEach.call(audios, audio => {
+        audio.onclick = function () {
+            alert("play");
+            this.firstElementChild.play();
+        };
+
+    });
 }
