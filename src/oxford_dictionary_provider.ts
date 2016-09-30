@@ -2,14 +2,15 @@
 
 
 import { APP_ID, APP_KEY } from "./secrets";
-import { Entry, Sense } from "./entry_classes";
+import { Entry, Sense, VariantForm } from "./entry_classes";
 
 
 const BASE_URL = "https://od-api.oxforddictionaries.com:443/api/v1/";
 
 
 export function lookUpWord(word: string, region: string,
-    populateTemplate: (entries: Entry[]) => void) {
+    populateTemplate: (word: string, region: string,
+        entries: Entry[]) => void) {
     const lookUpUrl = BASE_URL + "entries/en/" + word.toLowerCase()
         + "/regions=" + region;
 
@@ -25,7 +26,8 @@ export function lookUpWord(word: string, region: string,
         }
 
         const entries = processJson(request.responseText);
-        populateTemplate(entries);
+        region = region === "us" ? "American" : "British";
+        populateTemplate(word, region, entries);
     };
     request.onerror = () => {
         alert("Error when trying to send request!");
@@ -53,8 +55,8 @@ function processJson(json: string): Entry[] {
         const entries = sectionDefinition.entries;
 
         for (let entry of entries) {
-            const variantForms = [];
-            variantForms.push.apply(variantForms, entry.variantForms);
+            const otherSpellings: VariantForm[] = [];
+            otherSpellings.push.apply(otherSpellings, entry.variantForms);
 
             const rawSenses = entry.senses;
             const senses: Sense[] = [];
@@ -77,7 +79,8 @@ function processJson(json: string): Entry[] {
                 senses.push(new Sense(definition, subSenses));
             }
 
-            allEntries.push(new Entry(partOfSpeech, senses, transitivity));
+            allEntries.push(new Entry(partOfSpeech, senses, linkToAudio,
+                transitivity, otherSpellings));
         }
     }
 
