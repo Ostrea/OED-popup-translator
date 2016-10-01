@@ -27,6 +27,5 @@ function populateTemplate(word: string, region: string,
         audio.onclick = function () {
             this.firstElementChild.play();
         };
-
     });
 }
