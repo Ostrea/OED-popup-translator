@@ -62,6 +62,10 @@ function populateTemplate(word: string, region: string,
 function lookUpButtonHandler(): void {
     const word = (<HTMLInputElement>document
         .getElementById("word-to-look-up")).value;
+    if (word === "") {
+        return;
+    }
+
     const region = <Region>(<HTMLSelectElement>document
         .getElementById("language")).value;
     lookUpWord(word, region, populateTemplate);
