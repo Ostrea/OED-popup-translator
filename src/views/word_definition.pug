@@ -32,9 +32,9 @@ for entry in entries
                 li
                     span.sense
                         if sense.regions && sense.regions.length !== 0
-                            span.region= sense.regions.join(", ") + " "
+                            span.green-text= sense.regions.join(", ") + " "
                         if sense.registers && sense.registers.length !== 0
-                            span.region= sense.registers.join(", ") + " "
+                            span.green-text= sense.registers.join(", ") + " "
                         =sense.definition
                     if sense.subSenses && sense.subSenses.length !== 0
                         ol
@@ -42,8 +42,9 @@ for entry in entries
                                 li
                                     span.sense
                                         if subSense.regions && subSense.regions.length !== 0
-                                            span.region
+                                            span.green-text
                                                 =subSense.regions.join(", ") + " "
                                         if subSense.registers && subSense.registers.length !== 0
-                                            span.region= subSense.registers.join(", ") + " "
+                                            span.green-text
+                                                =subSense.registers.join(", ") + " "
                                         =subSense.definition
