@@ -12,7 +12,7 @@ for entry in entries
                 img(src="play.png")
         if entry.transitivity
             .transitivity #{entry.transitivity}
-        if entry.otherSpellings
+        if entry.otherSpellings && entry.otherSpellings.length !== 0
             .variant
                 | (
                 for variantForm, i in entry.otherSpellings
@@ -30,15 +30,15 @@ for entry in entries
             for sense in entry.senses
                 li
                     span.sense
-                        if sense.regions
+                        if sense.regions && sense.regions.length !== 0
                             span.region= sense.regions.join(", ") + " "
                         =sense.definition
-                    if sense.subSenses
+                    if sense.subSenses && sense.subSenses.length !== 0
                         ol
                             for subSense in sense.subSenses
                                 li
                                     span.sense
-                                        if subSense.regions
+                                        if subSense.regions && subSense.regions.length !== 0
                                             span.region
                                                 =subSense.regions.join(", ") + " "
                                         =subSense.definition
