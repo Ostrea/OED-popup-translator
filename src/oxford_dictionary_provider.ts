@@ -10,7 +10,7 @@ const BASE_URL = "https://od-api.oxforddictionaries.com:443/api/v1/";
 
 export function lookUpWord(word: string, region: Region,
     populateTemplate: (word: string, region: string,
-        entries: Entry[]) => void) {
+        entries: Entry[]) => void, notFound: () => void) {
     const lookUpUrl = BASE_URL + "entries/en/" + word.toLowerCase()
         + "/regions=" + region;
 
@@ -20,6 +20,10 @@ export function lookUpWord(word: string, region: Region,
     request.setRequestHeader("app_key", APP_KEY);
 
     request.onload = () => {
+        if (request.status === 404) {
+            notFound();
+            return;
+        }
         if (request.status !== 200) {
             alert("Bad response from server. Status: " + request.status);
             return;

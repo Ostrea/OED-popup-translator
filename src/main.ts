@@ -59,6 +59,12 @@ function populateTemplate(word: string, region: string,
 }
 
 
+function notFound(): void {
+    const wordDefinitionDiv = document.getElementById("word-definition");
+    wordDefinitionDiv.innerHTML = "Couldn't find word!";
+}
+
+
 function lookUpButtonHandler(): void {
     const word = (<HTMLInputElement>document
         .getElementById("word-to-look-up")).value;
@@ -68,5 +74,5 @@ function lookUpButtonHandler(): void {
 
     const region = <Region>(<HTMLSelectElement>document
         .getElementById("language")).value;
-    lookUpWord(word, region, populateTemplate);
+    lookUpWord(word, region, populateTemplate, notFound);
 }
