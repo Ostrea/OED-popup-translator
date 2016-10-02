@@ -78,13 +78,39 @@ function notFound(): void {
 
 
 function lookUpButtonHandler(): void {
-    const word = (<HTMLInputElement>document
-        .getElementById("word-to-look-up")).value;
+
+    function convertRussianLettersToEnglishIfNecessary(): string {
+        const russianLettersToEnglish = {
+                "й": "q", "ц": "w", "у": "e", "к": "r", "е": "t",
+                "н": "y", "г": "u", "ш": "i", "щ": "o", "з": "p",
+                "ф": "a", "ы": "s", "в": "d", "а": "f", "п": "g",
+                "р": "h", "о": "j", "л": "k", "д": "l", "я": "z",
+                "ч": "x", "с": "c", "м": "v", "и": "b", "т": "n",
+                "ь": "m"
+            };
+        const lowerCaseWord = word.toLowerCase();
+        let result = "";
+        for (let character of word) {
+            if (russianLettersToEnglish[character]) {
+                result += russianLettersToEnglish[character];
+            } else {
+                result += character;
+            }
+        }
+        return result;
+    }
+
+    const input = <HTMLInputElement>document.getElementById("word-to-look-up");
+    const word = input.value;
     if (word === "") {
         return;
+    }
+    const convertedWord = convertRussianLettersToEnglishIfNecessary();
+    if (convertedWord !== word) {
+        input.value = convertedWord;
     }
 
     const region = <Region>(<HTMLSelectElement>document
         .getElementById("language")).value;
-    lookUpWord(word, region, found, notFound);
+    lookUpWord(convertedWord, region, found, notFound);
 }
