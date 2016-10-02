@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
 
-    "name": "OED popup translator",
+    "name": "Popup dictionary",
     "description": "This extension shows a word translation from OED of the currently selected word",
     "version": "1.0",
     
