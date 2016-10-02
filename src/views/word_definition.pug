@@ -26,3 +26,19 @@ for entry in entries
                     - else
                         strong= variantForm.text + "; "
                 | )
+        ol.senses
+            for sense in entry.senses
+                li
+                    span.sense
+                        if sense.regions
+                            span.region= sense.regions.join(", ") + " "
+                        =sense.definition
+                    if sense.subSenses
+                        ol
+                            for subSense in sense.subSenses
+                                li
+                                    span.sense
+                                        if subSense.regions
+                                            span.region
+                                                =subSense.regions.join(", ") + " "
+                                        =subSense.definition
