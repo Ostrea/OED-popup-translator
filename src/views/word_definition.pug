@@ -10,8 +10,6 @@ for entry in entries
             span.audio
                 audio(src=entry.linkToAudio) Pronunciation
                 img(src="play.png")
-        if entry.transitivity
-            .transitivity #{entry.transitivity}
         if entry.otherSpellings && entry.otherSpellings.length !== 0
             .variant
                 | (
@@ -27,6 +25,8 @@ for entry in entries
                     - else
                         strong= variantForm.text + "; "
                 | )
+        if entry.transitivity
+            .transitivity Transitivity: #{entry.transitivity}
         ol.senses
             for sense in entry.senses
                 li
