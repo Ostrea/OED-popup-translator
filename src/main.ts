@@ -43,18 +43,25 @@ export function main(): void {
 }
 
 
-function populateTemplate(word: string, region: string,
+function found(word: string, region: string,
     entries: Entry[]): void {
-    const wordDefinitionDiv = document.getElementById("word-definition");
-    wordDefinitionDiv.innerHTML = template({
-        word: word, region: region, entries: entries
-    });
+    populateTemplate(word, region, entries);
 
+    const wordDefinitionDiv = document.getElementById("word-definition");
     const audios = wordDefinitionDiv.getElementsByClassName("audio");
     Array.prototype.forEach.call(audios, audio => {
         audio.onclick = function () {
             this.firstElementChild.play();
         };
+    });
+}
+
+
+function populateTemplate(word: string, region: string,
+    entries: Entry[]): void {
+    const wordDefinitionDiv = document.getElementById("word-definition");
+    wordDefinitionDiv.innerHTML = template({
+        word: word, region: region, entries: entries
     });
 }
 
@@ -74,5 +81,5 @@ function lookUpButtonHandler(): void {
 
     const region = <Region>(<HTMLSelectElement>document
         .getElementById("language")).value;
-    lookUpWord(word, region, populateTemplate, notFound);
+    lookUpWord(word, region, found, notFound);
 }

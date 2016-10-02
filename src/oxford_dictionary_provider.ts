@@ -9,7 +9,7 @@ const BASE_URL = "https://od-api.oxforddictionaries.com:443/api/v1/";
 
 
 export function lookUpWord(word: string, region: Region,
-    populateTemplate: (word: string, region: string,
+    found: (word: string, region: string,
         entries: Entry[]) => void, notFound: () => void) {
     const lookUpUrl = BASE_URL + "entries/en/" + word.toLowerCase()
         + "/regions=" + region;
@@ -31,7 +31,7 @@ export function lookUpWord(word: string, region: Region,
 
         const entries = processJson(request.responseText);
         const humanizedRegion = region === "us" ? "American" : "British";
-        populateTemplate(word, humanizedRegion, entries);
+        found(word, humanizedRegion, entries);
     };
     request.onerror = () => {
         alert("Error when trying to send request!");
