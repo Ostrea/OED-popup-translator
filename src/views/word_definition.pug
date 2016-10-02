@@ -15,12 +15,24 @@ for entry in entries
         if entry.otherSpellings
             .variant
                 | (
-                for variantForm in entry.otherSpellings
-                    - var regions = "";
+                - var i;
+                - for (i = 0; i < entry.otherSpellings.length - 1; i++) {
+                    - var variantForm = entry.otherSpellings[i];
+                    
                     - var j;
                     - for (j = 0; j < variantForm.regions.length - 1; j++) {
-                        em= variantForm.regions[j] + ", "
+                          em= variantForm.regions[j] + ", "
                     - }
-                    em= variantForm.regions[j] + " " 
-                    strong= variantForm.text + "; "
+                    em= variantForm.regions[j] + " "
+
+                    strong= variantForm.text + "; " 
+                - }
+                - var variantForm = entry.otherSpellings[i];
+                - var j;
+                - for (j = 0; j < variantForm.regions.length - 1; j++) {
+                        em= variantForm.regions[j] + ", "
+                - }
+                em= variantForm.regions[j] + " "
+
+                strong= variantForm.text 
                 | )
