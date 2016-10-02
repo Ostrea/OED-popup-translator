@@ -45,6 +45,8 @@ export function main(): void {
 
 function found(word: string, region: string,
     entries: Entry[]): void {
+    window.scroll(0, 0);
+
     populateTemplate(word, region, entries);
 
     const wordDefinitionDiv = document.getElementById("word-definition");
