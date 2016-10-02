@@ -43,28 +43,31 @@ export function main(): void {
 }
 
 
-function found(word: string, region: string,
-    entries: Entry[]): void {
+function found(word: string, region: string, entries: Entry[]): void {
+
+    function populateTemplate(word: string, region: string,
+        entries: Entry[]): void {
+        wordDefinitionDiv.innerHTML = template({
+            word: word, region: region, entries: entries
+        });
+    }
+
+    function setAudioHandlers() {
+        const audios = wordDefinitionDiv.getElementsByClassName("audio");
+        Array.prototype.forEach.call(audios, audio => {
+            audio.onclick = function () {
+                this.firstElementChild.play();
+            };
+        });
+    }
+
     window.scroll(0, 0);
+
+    const wordDefinitionDiv = document.getElementById("word-definition");
 
     populateTemplate(word, region, entries);
 
-    const wordDefinitionDiv = document.getElementById("word-definition");
-    const audios = wordDefinitionDiv.getElementsByClassName("audio");
-    Array.prototype.forEach.call(audios, audio => {
-        audio.onclick = function () {
-            this.firstElementChild.play();
-        };
-    });
-}
-
-
-function populateTemplate(word: string, region: string,
-    entries: Entry[]): void {
-    const wordDefinitionDiv = document.getElementById("word-definition");
-    wordDefinitionDiv.innerHTML = template({
-        word: word, region: region, entries: entries
-    });
+    setAudioHandlers();
 }
 
 
