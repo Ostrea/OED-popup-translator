@@ -2,13 +2,13 @@
 
 
 import { APP_ID, APP_KEY } from "./secrets";
-import { Entry, Sense, VariantForm } from "./entry_classes";
+import { Entry, Sense, VariantForm, Region } from "./entry_classes";
 
 
 const BASE_URL = "https://od-api.oxforddictionaries.com:443/api/v1/";
 
 
-export function lookUpWord(word: string, region: string,
+export function lookUpWord(word: string, region: Region,
     populateTemplate: (word: string, region: string,
         entries: Entry[]) => void) {
     const lookUpUrl = BASE_URL + "entries/en/" + word.toLowerCase()
@@ -26,7 +26,7 @@ export function lookUpWord(word: string, region: string,
         }
 
         const entries = processJson(request.responseText);
-        region = region === "us" ? "American" : "British";
+        const humanizedRegion = region === "us" ? "American" : "British";
         populateTemplate(word, region, entries);
     };
     request.onerror = () => {

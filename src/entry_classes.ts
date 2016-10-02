@@ -1,6 +1,9 @@
 "use strict";
 
 
+export type Region = "us" | "gb";
+
+
 export class Entry {
     partOfSpeech: string;
     transitivity?: string;
@@ -9,7 +12,7 @@ export class Entry {
     linkToAudio?: string;
 
     constructor(partOfSpeech: string, senses: Sense[], linkToAudio?: string,
-        transitivity?: string, otherSpellings?: VariantForm[], ) {
+        transitivity?: string, otherSpellings?: VariantForm[]) {
         this.partOfSpeech = partOfSpeech;
         this.senses = senses;
         this.transitivity = transitivity;
