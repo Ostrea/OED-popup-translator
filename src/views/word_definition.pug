@@ -16,11 +16,12 @@ for entry in entries
             .variant
                 | (
                 for variantForm, i in entry.otherSpellings
-                    for region, j in variantForm.regions
-                        - if (j === variantForm.regions.length - 1)
-                            em= region + " "
-                        - else
-                            em= region + ", "
+                    if variantForm.regions && variantForm.regions.length !== 0
+                        for region, j in variantForm.regions
+                            - if (j === variantForm.regions.length - 1)
+                                em= region + " "
+                            - else
+                                em= region + ", "
                     - if (i === entry.otherSpellings.length - 1)
                         strong= variantForm.text
                     - else
@@ -32,6 +33,8 @@ for entry in entries
                     span.sense
                         if sense.regions && sense.regions.length !== 0
                             span.region= sense.regions.join(", ") + " "
+                        if sense.registers && sense.registers.length !== 0
+                            span.region= sense.registers.join(", ") + " "
                         =sense.definition
                     if sense.subSenses && sense.subSenses.length !== 0
                         ol
@@ -41,4 +44,6 @@ for entry in entries
                                         if subSense.regions && subSense.regions.length !== 0
                                             span.region
                                                 =subSense.regions.join(", ") + " "
+                                        if subSense.registers && subSense.registers.length !== 0
+                                            span.region= subSense.registers.join(", ") + " "
                                         =subSense.definition

@@ -63,6 +63,7 @@ function processJson(json: string): Entry[] {
             for (let sense of rawSenses) {
                 const definition: string = sense.definitions[0];
                 const examples = sense.examples;
+                const registers = sense.registers;
 
                 let subSenses: Sense[] = undefined;
                 if (sense.subsenses) {
@@ -71,12 +72,14 @@ function processJson(json: string): Entry[] {
                         const definition: string = subSense.definitions[0];
                         const examples = subSense.examples;
                         const regions = subSense.regions;
+                        const registers = subSense.registers;
+
                         subSenses.push(new Sense(definition, undefined,
-                            regions));
+                            regions, registers));
                     }
                 }
 
-                senses.push(new Sense(definition, subSenses));
+                senses.push(new Sense(definition, subSenses, registers));
             }
 
             allEntries.push(new Entry(partOfSpeech, senses, linkToAudio,

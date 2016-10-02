@@ -23,11 +23,14 @@ export class Sense {
     definition: string;
     subSenses?: Sense[];
     regions?: string[];
+    registers?: string[];
 
-    constructor(definition: string, subSenses?: Sense[], regions?: string[]) {
+    constructor(definition: string, subSenses?: Sense[], regions?: string[],
+        registers?: string[]) {
         this.definition = definition;
         this.subSenses = subSenses;
         this.regions = regions;
+        this.registers = registers;
     }
 }
 
