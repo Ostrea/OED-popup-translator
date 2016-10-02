@@ -27,7 +27,7 @@ export function lookUpWord(word: string, region: Region,
 
         const entries = processJson(request.responseText);
         const humanizedRegion = region === "us" ? "American" : "British";
-        populateTemplate(word, region, entries);
+        populateTemplate(word, humanizedRegion, entries);
     };
     request.onerror = () => {
         alert("Error when trying to send request!");
