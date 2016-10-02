@@ -12,3 +12,15 @@ for entry in entries
                 img(src="play.png")
         if entry.transitivity
             .transitivity #{entry.transitivity}
+        if entry.otherSpellings
+            .variant
+                | (
+                for variantForm in entry.otherSpellings
+                    - var regions = "";
+                    - var j;
+                    - for (j = 0; j < variantForm.regions.length - 1; j++) {
+                        em= variantForm.regions[j] + ", "
+                    - }
+                    em= variantForm.regions[j] + " " 
+                    strong= variantForm.text + "; "
+                | )
