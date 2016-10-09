@@ -5,3 +5,4 @@ assets/
 node_modules/
 dist/
 secrets.ts
+specs/*.js
