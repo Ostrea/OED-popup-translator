@@ -67,7 +67,9 @@ function processJson(json: string): Entry[] {
             const rawSenses = entry.senses;
             const senses: Sense[] = [];
             for (let sense of rawSenses) {
-                const definition: string = sense.definitions[0];
+                const definition: string = sense.definitions ?
+                    sense.definitions[0] : sense.crossReferenceMarkers;
+
                 const examples = sense.examples;
                 const registers = sense.registers;
 
