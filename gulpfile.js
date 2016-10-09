@@ -109,9 +109,8 @@ gulp.task("default", [
 
 
 gulp.task("compile-specs-ts", function () {
-    return gulp.src(["typings/globals/jasmine/index.d.ts", "specs/*.ts"])
-        .pipe(ts())
-        .pipe(gulp.dest("specs"));
+    return compileTypeScriptFiles(["specs/first_spec.ts"], "specs.js")
+        .pipe(gulp.dest("specs")); 
 });
 
 
