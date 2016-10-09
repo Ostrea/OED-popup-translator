@@ -1,9 +1,6 @@
 {
     "files": [
-        "typings/index.d.ts",
-        "src/content.ts",
-        "src/popup.ts",
-        "src/main.ts"
+        "typings/index.d.ts"
     ],
     "compilerOptions": {
         "target": "es5",
