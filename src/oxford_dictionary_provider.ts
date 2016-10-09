@@ -77,7 +77,9 @@ function processJson(json: string): Entry[] {
                 if (sense.subsenses) {
                     subSenses = [];
                     for (let subSense of sense.subsenses) {
-                        const definition: string = subSense.definitions[0];
+                        const definition: string = sense.definitions ?
+                            sense.definitions[0] : sense.crossReferenceMarkers;
+
                         const examples = subSense.examples;
                         const regions = subSense.regions;
                         const registers = subSense.registers;
