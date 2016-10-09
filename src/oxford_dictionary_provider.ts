@@ -53,10 +53,13 @@ function processJson(json: string): Entry[] {
             transitivity = sectionDefinition.grammaticalFeatures[0].text;
         }
 
-        const pronunciations = sectionDefinition.pronunciations.find(
-            obj => obj.audioFile);
-        const linkToAudio = pronunciations ?
-            pronunciations.audioFile : undefined;
+        let linkToAudio;
+        if (sectionDefinition.pronunciations) {
+            const pronunciationsAudio = sectionDefinition.pronunciations.find(
+                obj => obj.audioFile);
+            linkToAudio = pronunciationsAudio ?
+                pronunciationsAudio.audioFile : undefined;
+        }
 
         const entries = sectionDefinition.entries;
 
