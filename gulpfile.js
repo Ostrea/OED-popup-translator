@@ -108,13 +108,18 @@ gulp.task("default", [
 ]);
 
 
+gulp.task("delete-compiled-specs", function () {
+    return del(["specs.js"]);
+});
+
+
 gulp.task("compile-specs-ts", function () {
     return compileTypeScriptFiles(["specs/first_spec.ts"], "specs.js")
         .pipe(gulp.dest("specs")); 
 });
 
 
-gulp.task("test", ["compile-specs-ts"], function () {
+gulp.task("test", ["delete-compiled-specs", "compile-specs-ts"], function () {
     return gulp.src("specs/*.js")
         .pipe(jasmine());
 });
