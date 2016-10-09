@@ -12,7 +12,7 @@ var buffer = require("vinyl-buffer");
 var del = require('del');
 var pug = require('gulp-pug');
 var jasmine = require('gulp-jasmine');
-var ts = require('gulp-typescript');
+// var ts = require('gulp-typescript');
 
 
 var paths = {
@@ -101,7 +101,7 @@ gulp.task("compile-pug-to-js", function () {
         .pipe(gulp.dest("dist"));
 });
 
-
+// TODO Maybe make them dependent not sure.
 gulp.task("default", [
     "clean-dist", "copy-manifest", "copy-assets", "copy-html", "copy-css",
     "compile-popup-script", "compile-content-script", "compile-pug-to-js"
@@ -113,13 +113,13 @@ gulp.task("delete-compiled-specs", function () {
 });
 
 
-gulp.task("compile-specs-ts", function () {
+gulp.task("compile-specs", function () {
     return compileTypeScriptFiles(["specs/first_spec.ts"], "specs.js")
         .pipe(gulp.dest("specs")); 
 });
 
 
-gulp.task("test", ["delete-compiled-specs", "compile-specs-ts"], function () {
+gulp.task("test", ["delete-compiled-specs", "compile-specs"], function () {
     return gulp.src("specs/*.js")
         .pipe(jasmine());
 });
