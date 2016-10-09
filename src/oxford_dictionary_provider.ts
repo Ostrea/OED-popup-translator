@@ -41,7 +41,7 @@ export function lookUpWord(word: string, region: Region,
 }
 
 
-function processJson(json: string): Entry[] {
+export function processJson(json: string): Entry[] {
     const rawEntries = JSON.parse(json).results[0].lexicalEntries;
 
     const allEntries: Entry[] = [];
