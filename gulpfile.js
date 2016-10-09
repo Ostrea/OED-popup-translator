@@ -11,6 +11,8 @@ var sourcemaps = require("gulp-sourcemaps");
 var buffer = require("vinyl-buffer");
 var del = require('del');
 var pug = require('gulp-pug');
+var jasmine = require('gulp-jasmine');
+var ts = require('gulp-typescript');
 
 
 var paths = {
@@ -104,3 +106,17 @@ gulp.task("default", [
     "clean-dist", "copy-manifest", "copy-assets", "copy-html", "copy-css",
     "compile-popup-script", "compile-content-script", "compile-pug-to-js"
 ]);
+
+
+gulp.task("test", function () {
+    
+    function compileTs() {
+        gulp.src("specs/*.ts")
+            .pipe(ts())
+            .pipe(gulp.dest("specs"));
+    }
+    
+    compileTs();
+    return gulp.src("specs/*.js")
+        .pipe(jasmine());
+});
