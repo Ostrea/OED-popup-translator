@@ -110,13 +110,12 @@ gulp.task("default", [
 
 gulp.task("test", function () {
     
-    function compileTs() {
-        gulp.src("specs/*.ts")
-            .pipe(ts())
-            .pipe(gulp.dest("specs"));
+    function compileSpecsTs() {
+        var tsProject = ts.createProject("tsconfig.json");
+        tsProject.src().pipe(ts(tsProject));
     }
     
-    compileTs();
+    compileSpecsTs();
     return gulp.src("specs/*.js")
         .pipe(jasmine());
 });
