@@ -1,6 +1,12 @@
 {
     "files": [
-        "typings/index.d.ts"
+        "typings/index.d.ts",
+        "specs/first_spec.ts",
+        "main.ts",
+        "content.ts",
+        "entry_classes.ts",
+        "oxford_dictionary_provider.ts",
+        "popup.ts"
     ],
     "compilerOptions": {
         "target": "es5",
