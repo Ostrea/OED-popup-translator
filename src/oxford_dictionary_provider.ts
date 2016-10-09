@@ -80,8 +80,9 @@ function processJson(json: string): Entry[] {
                 if (sense.subsenses) {
                     subSenses = [];
                     for (let subSense of sense.subsenses) {
-                        const definition: string = sense.definitions ?
-                            sense.definitions[0] : sense.crossReferenceMarkers;
+                        const definition: string = subSense.definitions ?
+                            subSense.definitions[0] :
+                            subSense.crossReferenceMarkers;
 
                         const examples = subSense.examples;
                         const regions = subSense.regions;
